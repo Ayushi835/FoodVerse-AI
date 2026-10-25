@@ -3,7 +3,7 @@ import {createRoot} from 'react-dom/client';
 import './style.css';
 
 async function request(path,body){
-  const response=await fetch('/api/'+path,{method:'POST',body:body instanceof FormData?body:JSON.stringify(body),headers:body instanceof FormData?{}:{'Content-Type':'application/json'}});
+  const response=await fetch(`${import.meta.env.VITE_API_URL || ''}/api/${path}`,{method:'POST',body:body instanceof FormData?body:JSON.stringify(body),headers:body instanceof FormData?{}:{'Content-Type':'application/json'}});
   let data;try{data=await response.json()}catch{throw new Error('The server did not return JSON. Is the backend running?')}
   if(!response.ok)throw new Error(typeof data.detail==='string'?data.detail:'Request failed');
   return data;

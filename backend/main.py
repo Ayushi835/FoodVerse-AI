@@ -102,3 +102,15 @@ async def kitchen(req: KitchenRequest):
               'Return JSON object with title, summary, ingredients (array), steps (array), '
               'safety_tips (array), limitations (string). Avoid allergens, mention cross-contact risk and safe cooking.')
     return await ai_json(prompt)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "https://foodverse-ai-501o.onrender.com"
+    ],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
