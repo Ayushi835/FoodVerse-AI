@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 from typing import Literal
+from fastapi.middleware.cors import CORSMiddleware
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
@@ -103,12 +104,13 @@ async def kitchen(req: KitchenRequest):
               'safety_tips (array), limitations (string). Avoid allergens, mention cross-contact risk and safe cooking.')
     return await ai_json(prompt)
 
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
-        "https://foodverse-ai-501o.onrender.com"
+        "https://food-verse-ai-ashen.vercel.app"
     ],
     allow_credentials=False,
     allow_methods=["*"],
